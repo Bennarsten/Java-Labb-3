@@ -1,8 +1,18 @@
 public class Entity0 extends Entity
 {
+    private Packet pkt;
     // Perform any necessary initialization in the constructor
+    private Packet pkt;
     public Entity0()
     {
+        int[] hej= new int[3];
+        hej[0] = 1;
+        hej[1] = 2;
+        pkt = new Packet(5,5,hej );
+        System.out.println("ETT PAKET: ");
+        System.out.println(pkt.getSource());
+
+        System.out.println("HEJEHEJEHEJ");
     }
 
     // Handle updates when a packet is received.  Students will need to call
