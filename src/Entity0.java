@@ -10,7 +10,7 @@ public class Entity0 extends Entity
         pkt = new Packet(5,5,hej );
         System.out.println("ETT PAKET: ");
         System.out.println(pkt.getSource());
-        //HÖÖÖÖÖÖÖJ
+        //HÖÖÖÖÖÖÖJo
         System.out.println("HEJEHEJEHEJ");
     }
 
