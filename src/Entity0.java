@@ -2,6 +2,7 @@ public class Entity0 extends Entity
 {
     private Packet pkt;
     // Perform any necessary initialization in the constructor
+    private Packet pkt;
     public Entity0()
     {
         int[] hej= new int[3];
@@ -11,6 +12,7 @@ public class Entity0 extends Entity
         System.out.println("ETT PAKET: ");
         System.out.println(pkt.getSource());
 
+        System.out.println("HEJEHEJEHEJ");
     }
 
     // Handle updates when a packet is received.  Students will need to call
