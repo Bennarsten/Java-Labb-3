@@ -6,16 +6,6 @@ public class Entity0 extends Entity
     public Entity0()
     {
 
-        /*int[] hej= new int[3];
-        hej[0] = 1;
-        hej[1] = 2;
-        pkt = new Packet(5,5,hej );
-        System.out.println("ETT PAKET: ");
-        System.out.println(pkt.getSource());
-        //HÖÖÖÖÖÖÖJommmm
-        System.out.println("HEJEHEJEHEJ");
-        System.out.println("VAFAN");
-        //hejigen*/
         cost = new int[4];
         distanceTable[0][0] = 0;
         distanceTable[1][1] = 1;
