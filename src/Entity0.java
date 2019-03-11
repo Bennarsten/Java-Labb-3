@@ -2,10 +2,11 @@ public class Entity0 extends Entity
 {
     // Perform any necessary initialization in the constructor
     private Packet pkt;
+    private Event event;
     private int[] cost;
     public Entity0()
     {
-
+        //event0 = new Event();
         cost = new int[4];
         distanceTable[0][0] = 0;
         distanceTable[1][1] = 1;
@@ -13,18 +14,30 @@ public class Entity0 extends Entity
         distanceTable[3][3] = 7;
 
 
-        for(int i=0; i<4; i++){
-            if(i==0 || i ==1)
-                cost[i] = i;
-            if(i==2)
-                cost[i] = 3;
-            if(i==3)
-                cost[i] = 7;
-        }
+        cost[0] = 0;
+        cost[1] = 1;
+        cost[2] = 3;
+        cost[3] = 7;
 
 
-        pkt = new Packet(0,1,cost);
-        NetworkSimulator.toLayer2(pkt);
+
+        Packet pk1 = new Packet(0,1,cost);
+        Packet pk2 = new Packet(0,2,cost);
+        Packet pk3 = new Packet(0,3,cost);
+
+
+        NetworkSimulator.toLayer2(pk1);
+        NetworkSimulator.toLayer2(pk2);
+        NetworkSimulator.toLayer2(pk3);
+
+
+        /*for(int i=1; i<4; i++) {
+            pkt = new Packet(0, i, cost);
+            NetworkSimulator.toLayer2(pkt);
+
+
+        }*/
+
     }
 
     // Handle updates when a packet is received.  Students will need to call
@@ -34,13 +47,25 @@ public class Entity0 extends Entity
     // details.
     public void update(Packet p)
     {
-        pkt = new Packet(0,p.getDest(),cost);
+
+        printDT();
+        pkt = new Packet(0,p.getSource(),cost);
         NetworkSimulator.toLayer2(pkt);
+
+        for(int i=0; i<4; i++){
+            if(distanceTable[i][i]!=p.getMincost(i)){
+                linkCostChangeHandler(i,p.getMincost(i));
+                Packet pack = new Packet(0,i,cost);
+                NetworkSimulator.toLayer2(pack);
+            }
+
+        }
     }
 
     public void linkCostChangeHandler(int whichLink, int newCost)
     {
         distanceTable[whichLink][whichLink] = newCost;
+        cost[whichLink] = newCost;
     }
 
     public void printDT()

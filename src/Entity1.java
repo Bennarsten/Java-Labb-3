@@ -25,8 +25,7 @@ public class Entity1 extends Entity
     {
         System.out.println(p.getSource() + "HAR LANDAT");
         printDT();
-        Packet pkt = new Packet(1,p.getSource(),cost);
-        NetworkSimulator.toLayer2(pkt);
+
     }
 
     public void linkCostChangeHandler(int whichLink, int newCost)
