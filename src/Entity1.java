@@ -1,12 +1,19 @@
 public class Entity1 extends Entity
 {
+
     // Perform any necessary initialization in the constructor
+    int[] cost;
     public Entity1()
     {
         distanceTable[0][0] = 1;
         distanceTable[1][1] = 0;
         distanceTable[2][2] = 1;
         distanceTable[3][3] = 999; //mergat o klartkok123
+        cost = new int[4];
+        cost[0] = 1;
+        cost[1] = 0;
+        cost[2] = 1;
+        cost[3] = 999;
     }
 
     // Handle updates when a packet is received.  Students will need to call
@@ -16,10 +23,15 @@ public class Entity1 extends Entity
     // details.
     public void update(Packet p)
     {
+        System.out.println(p.getSource() + "HAR LANDAT");
+        printDT();
+        Packet pkt = new Packet(1,p.getSource(),cost);
+        NetworkSimulator.toLayer2(pkt);
     }
 
     public void linkCostChangeHandler(int whichLink, int newCost)
     {
+        distanceTable[whichLink][whichLink] = newCost;
     }
 
     public void printDT()
