@@ -6,7 +6,7 @@ public class Entity1 extends Entity
         distanceTable[0][0] = 1;
         distanceTable[1][1] = 0;
         distanceTable[2][2] = 1;
-        distanceTable[3][3] = 999; //mergat o klartkok
+        distanceTable[3][3] = 999; //mergat o klartkok123
     }
 
     // Handle updates when a packet is received.  Students will need to call
