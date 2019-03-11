@@ -12,15 +12,10 @@ public class Entity0 extends Entity
         distanceTable[2][2] = 3;
         distanceTable[3][3] = 7;
 
-
-        for(int i=0; i<4; i++){
-            if(i==0 || i ==1)
-                cost[i] = i;
-            if(i==2)
-                cost[i] = 3;
-            if(i==3)
-                cost[i] = 7;
-        }
+        cost[0] = 0;
+        cost[1] = 1;
+        cost[2] = 3;
+        cost[3] = 7;
 
 
         pkt = new Packet(0,1,cost);
