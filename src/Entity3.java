@@ -20,6 +20,7 @@ public class Entity3 extends Entity
 
     public void linkCostChangeHandler(int whichLink, int newCost)
     {
+        distanceTable[whichLink][whichLink] = newCost;
     }
 
     public void printDT()
