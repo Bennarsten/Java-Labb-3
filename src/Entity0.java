@@ -1,18 +1,27 @@
 public class Entity0 extends Entity
 {
     // Perform any necessary initialization in the constructor
+    private Packet pkt;
+    private int[] cost;
     public Entity0()
     {
-        int[] hej= new int[3];
+
+        /*int[] hej= new int[3];
         hej[0] = 1;
         hej[1] = 2;
         pkt = new Packet(5,5,hej );
         System.out.println("ETT PAKET: ");
         System.out.println(pkt.getSource());
-        //HÖÖÖÖÖÖÖJ
+        //HÖÖÖÖÖÖÖJommmm
         System.out.println("HEJEHEJEHEJ");
         System.out.println("VAFAN");
-        //hejigen
+        //hejigen*/
+        cost = new int[4];
+        distanceTable[0][0] = 0;
+        distanceTable[1][1] = 1;
+        distanceTable[2][2] = 3;
+        distanceTable[3][3] = 7;
+
     }
 
     // Handle updates when a packet is received.  Students will need to call
@@ -22,10 +31,13 @@ public class Entity0 extends Entity
     // details.
     public void update(Packet p)
     {
+        pkt = new Packet(0,p.getDest(),cost);
+        NetworkSimulator.toLayer2(pkt);
     }
 
     public void linkCostChangeHandler(int whichLink, int newCost)
     {
+
     }
 
     public void printDT()

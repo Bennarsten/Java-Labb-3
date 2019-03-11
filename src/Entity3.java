@@ -3,6 +3,10 @@ public class Entity3 extends Entity
     // Perform any necessary initialization in the constructor
     public Entity3()
     {
+        distanceTable[0][0] = 7;
+        distanceTable[1][1] = 999;
+        distanceTable[2][2] = 2;
+        distanceTable[3][3] = 0;
     }
 
     // Handle updates when a packet is received.  Students will need to call
