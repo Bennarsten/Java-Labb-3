@@ -40,17 +40,18 @@ public class Entity0 extends Entity
         System.out.println("Packet received from "+p.getSource() + " in "+p.getDest() +" at time "+ event0.getTime());
         System.out.println("-----UPDATE 0-----");
 
-        /*for(int i=0; i<4; i++){
-            if(distanceTable[p.getSource()][p.getSource()]!=p.getMincost(p.getSource())){
-                linkCostChangeHandler(i,p.getMincost(p.getSource()));
-                Packet pack = new Packet(0,p.getSource(),distanceTable[p.getSource()]);
-                NetworkSimulator.toLayer2(pack);
-            }
-        }*/
         if(distanceTable[p.getSource()][p.getSource()]!=p.getMincost(p.getDest())){
             System.out.println("distanceTable["+p.getSource()+"]["+p.getSource()+"] = "+p.getMincost(p.getDest()));
             distanceTable[p.getSource()][p.getSource()] = p.getMincost(p.getDest());
+
         }
+        if(p.getSource()==1){ //inkommande från entity 1
+            distanceTable[2][1] = p.getMincost(0)+p.getMincost(2); //länkkostnad från 0->1 + 1->2
+        }
+        if(p.getSource()==3){ //inkommande från entity 3
+            distanceTable[2][3] = p.getMincost(0)+p.getMincost(2); //länkkostnad från 0->3 + 3->2
+        }
+        printDT();
     }
 
     public void linkCostChangeHandler(int whichLink, int newCost)

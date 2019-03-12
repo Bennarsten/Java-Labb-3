@@ -43,9 +43,13 @@ public class Entity1 extends Entity
                 NetworkSimulator.toLayer2(pack);
             }
         }*/
+        // inkommande paket från närliggande entitet ex distanceTable[0][0] om ändrat, ändra i tabell
         if(distanceTable[p.getSource()][p.getSource()]!=p.getMincost(p.getDest())){
             System.out.println("distanceTable["+p.getSource()+"]["+p.getSource()+"] = "+p.getMincost(p.getDest()));
-            distanceTable[p.getSource()][p.getSource()] = p.getMincost(p.getDest());
+            distanceTable[p.getSource()][p.getSource()] = p.getMincost(p.getDest()); // ändrar distancetable till minsta kostnad från paket
+
+            Packet pk0 = new Packet(1,p.getSource(),distanceTable[p.getSource()]);
+            NetworkSimulator.toLayer2(pk0);
         }
         if(p.getSource()==2){
             p.getMincost(3);
