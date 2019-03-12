@@ -6,20 +6,28 @@ public class Entity0 extends Entity
     public Entity0()
     {
         event0 = new Event(0,1,0);
-        distanceTable[0][0] = NetworkSimulator.cost[0][0];
-        distanceTable[0][1] = NetworkSimulator.cost[0][1];
-        distanceTable[0][2] = NetworkSimulator.cost[0][2];
-        distanceTable[0][3] = NetworkSimulator.cost[0][3];
+        /*distanceTable[0][0] = NetworkSimulator.cost[0][0];
+        distanceTable[1][1] = NetworkSimulator.cost[0][1];
+        distanceTable[2][2] = NetworkSimulator.cost[0][2];
+        distanceTable[3][3] = NetworkSimulator.cost[0][3];*/
+        distanceTable[0][0] = 0;
+        distanceTable[1][1] = 1;
+        distanceTable[2][2] = 3;
+        distanceTable[3][3] = 7;
         printDT();
+        //printDT();
 
-        Packet pk1 = new Packet(0,1,distanceTable[0]);
-        Packet pk2 = new Packet(0,2,distanceTable[0]);
-        Packet pk3 = new Packet(0,3,distanceTable[0]);
+        Packet pk1 = new Packet(0,1,distanceTable[1]);
+        for (int i=0; i<4 ; i++){
+            System.out.println("PK1 getMinCost("+i+")= "+pk1.getMincost(i));
+        }
+        /*Packet pk2 = new Packet(0,2,distanceTable[2]);
+        Packet pk3 = new Packet(0,3,distanceTable[3]);*/
 
 
         NetworkSimulator.toLayer2(pk1);
-        NetworkSimulator.toLayer2(pk2);
-        NetworkSimulator.toLayer2(pk3);
+        /*NetworkSimulator.toLayer2(pk2);
+        NetworkSimulator.toLayer2(pk3);*/
     }
 
     // Handle updates when a packet is received.  Students will need to call
@@ -29,15 +37,19 @@ public class Entity0 extends Entity
     // details.
     public void update(Packet p)
     {
-        System.out.println("Packet received from "+p.getSource() + "in "+p.getDest() +"at time "+ event0.getTime());
-        printDT();
-        for(int i=0; i<4; i++){
-            if(distanceTable[p.getDest()][p.getSource()]!=p.getMincost(i)){
-                linkCostChangeHandler(i,p.getMincost(i));
-                Packet pack = new Packet(0,i,distanceTable[0]);
+        System.out.println("Packet received from "+p.getSource() + " in "+p.getDest() +" at time "+ event0.getTime());
+        System.out.println("-----UPDATE 0-----");
+
+        /*for(int i=0; i<4; i++){
+            if(distanceTable[p.getSource()][p.getSource()]!=p.getMincost(p.getSource())){
+                linkCostChangeHandler(i,p.getMincost(p.getSource()));
+                Packet pack = new Packet(0,p.getSource(),distanceTable[p.getSource()]);
                 NetworkSimulator.toLayer2(pack);
             }
-
+        }*/
+        if(distanceTable[p.getSource()][p.getSource()]!=p.getMincost(p.getDest())){
+            System.out.println("distanceTable["+p.getSource()+"]["+p.getSource()+"] = "+p.getMincost(p.getDest()));
+            distanceTable[p.getSource()][p.getSource()] = p.getMincost(p.getDest());
         }
     }
 

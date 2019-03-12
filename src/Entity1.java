@@ -4,22 +4,20 @@ public class Entity1 extends Entity
     // Perform any necessary initialization in the constructor
     public Entity1()
     {
-        distanceTable[1][0] = 1;
+        distanceTable[0][0] = 1;
         distanceTable[1][1] = 0;
-        distanceTable[1][2] = 1;
-        distanceTable[1][3] = 999; //mergat o klartkok123
+        distanceTable[2][2] = 1;
+        distanceTable[3][3] = 999; //mergat o klartkok123
 
 
-        printDT();
+        //printDT();
 
-        Packet pk0 = new Packet(1,0,distanceTable[1]);
-        Packet pk1 = new Packet(1,1,distanceTable[1]);
-        Packet pk2 = new Packet(1,2,distanceTable[1]);
+        /*Packet pk0 = new Packet(1,0,distanceTable[0]);
+        Packet pk2 = new Packet(1,2,distanceTable[1]);*/
 
 
-        NetworkSimulator.toLayer2(pk1);
-        NetworkSimulator.toLayer2(pk2);
-        NetworkSimulator.toLayer2(pk0);
+        /*NetworkSimulator.toLayer2(pk2);
+        NetworkSimulator.toLayer2(pk0);*/
     }
 
     // Handle updates when a packet is received.  Students will need to call
@@ -30,13 +28,27 @@ public class Entity1 extends Entity
     public void update(Packet p)
     {
         //System.out.println("Packet received from "+p.getSource() + "in "+p.getDest() +"at time "+ event0.getTime());
-        System.out.println(p.getSource() + "HAR LANDAT");
-        for(int i=0; i<4; i++) {
+        System.out.println("-----UPDATE 1-----");
+        /*for(int i=0; i<4; i++) {
             if (distanceTable[p.getDest()][p.getSource()] != p.getMincost(i)) {
                 linkCostChangeHandler(i, p.getMincost(i));
                 Packet pack = new Packet(1, i, distanceTable[1]);
                 NetworkSimulator.toLayer2(pack);
             }
+        }*/
+        /*for(int i=0; i<4; i++){
+            if(distanceTable[p.getSource()][p.getSource()]!=p.getMincost(p.getSource())){
+                linkCostChangeHandler(i,p.getMincost(p.getSource()));
+                Packet pack = new Packet(1,p.getSource(),distanceTable[p.getSource()]);
+                NetworkSimulator.toLayer2(pack);
+            }
+        }*/
+        if(distanceTable[p.getSource()][p.getSource()]!=p.getMincost(p.getDest())){
+            System.out.println("distanceTable["+p.getSource()+"]["+p.getSource()+"] = "+p.getMincost(p.getDest()));
+            distanceTable[p.getSource()][p.getSource()] = p.getMincost(p.getDest());
+        }
+        if(p.getSource()==2){
+            p.getMincost(3);
         }
         printDT();
 
