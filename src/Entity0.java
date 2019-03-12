@@ -1,6 +1,6 @@
 public class Entity0 extends Entity
 {
-    // Perform any necessary initialization in the constructor
+    // Perform any necessary initialization in the constructorsdds
     private Packet pkt;
     private Event event0;
     public Entity0()
