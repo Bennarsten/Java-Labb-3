@@ -44,15 +44,23 @@ public class Entity1 extends Entity
             }
         }*/
         // inkommande paket från närliggande entitet ex distanceTable[0][0] om ändrat, ändra i tabell
-        if(distanceTable[p.getSource()][p.getSource()]!=p.getMincost(p.getDest())){
+        /*if(distanceTable[p.getSource()][p.getSource()]!=p.getMincost(p.getDest())){
             System.out.println("distanceTable["+p.getSource()+"]["+p.getSource()+"] = "+p.getMincost(p.getDest()));
             distanceTable[p.getSource()][p.getSource()] = p.getMincost(p.getDest()); // ändrar distancetable till minsta kostnad från paket
 
-            Packet pk0 = new Packet(1,p.getSource(),distanceTable[p.getSource()]);
-            NetworkSimulator.toLayer2(pk0);
+
+        }*/
+        if(p.getSource()==0){ //inkommande från entity 0
+            int temp = distanceTable[0][0]+p.getMincost(2);
+            System.out.println("p.getmincost(2)="+p.getMincost(2));
+            if(distanceTable[2][0]!= temp) {
+                distanceTable[2][0] = distanceTable[0][0] + p.getMincost(2); //länkkostnad från 1->0 + 0->2 ej första varvet
+                Packet pk0 = new Packet(1, 0, distanceTable[2]);
+                NetworkSimulator.toLayer2(pk0);
+            }
         }
-        if(p.getSource()==2){
-            p.getMincost(3);
+        if(p.getSource()==2){ //inkommande från entity 2
+            distanceTable[3][2] = p.getMincost(1)+p.getMincost(3); //länkkostnad från 1->2 + 2->3
         }
         printDT();
 
