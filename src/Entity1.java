@@ -2,18 +2,24 @@ public class Entity1 extends Entity
 {
 
     // Perform any necessary initialization in the constructor
-    int[] cost;
     public Entity1()
     {
-        distanceTable[0][0] = 1;
+        distanceTable[1][0] = 1;
         distanceTable[1][1] = 0;
-        distanceTable[2][2] = 1;
-        distanceTable[3][3] = 999; //mergat o klartkok123
-        cost = new int[4];
-        cost[0] = 1;
-        cost[1] = 0;
-        cost[2] = 1;
-        cost[3] = 999;
+        distanceTable[1][2] = 1;
+        distanceTable[1][3] = 999; //mergat o klartkok123
+
+
+        printDT();
+
+        Packet pk0 = new Packet(1,0,distanceTable[1]);
+        Packet pk1 = new Packet(1,1,distanceTable[1]);
+        Packet pk2 = new Packet(1,2,distanceTable[1]);
+
+
+        NetworkSimulator.toLayer2(pk1);
+        NetworkSimulator.toLayer2(pk2);
+        NetworkSimulator.toLayer2(pk0);
     }
 
     // Handle updates when a packet is received.  Students will need to call
@@ -23,7 +29,15 @@ public class Entity1 extends Entity
     // details.
     public void update(Packet p)
     {
+        //System.out.println("Packet received from "+p.getSource() + "in "+p.getDest() +"at time "+ event0.getTime());
         System.out.println(p.getSource() + "HAR LANDAT");
+        for(int i=0; i<4; i++) {
+            if (distanceTable[p.getDest()][p.getSource()] != p.getMincost(i)) {
+                linkCostChangeHandler(i, p.getMincost(i));
+                Packet pack = new Packet(1, i, distanceTable[1]);
+                NetworkSimulator.toLayer2(pack);
+            }
+        }
         printDT();
 
     }
