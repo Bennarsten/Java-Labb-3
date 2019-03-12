@@ -40,13 +40,19 @@ public class Entity0 extends Entity
         System.out.println("Packet received from "+p.getSource() + " in "+p.getDest() +" at time "+ event0.getTime());
         System.out.println("-----UPDATE 0-----");
 
-        if(distanceTable[p.getSource()][p.getSource()]!=p.getMincost(p.getDest())){
+        /*if(distanceTable[p.getSource()][p.getSource()]!=p.getMincost(p.getDest())){
             System.out.println("distanceTable["+p.getSource()+"]["+p.getSource()+"] = "+p.getMincost(p.getDest()));
             distanceTable[p.getSource()][p.getSource()] = p.getMincost(p.getDest());
 
-        }
+        }*/
         if(p.getSource()==1){ //inkommande från entity 1
-            distanceTable[2][1] = p.getMincost(0)+p.getMincost(2); //länkkostnad från 0->1 + 1->2
+            int temp = distanceTable[1][1]+p.getMincost(2);
+            if(distanceTable[2][1]!= temp){
+                distanceTable[2][1] = distanceTable[1][1]+p.getMincost(2); //länkkostnad från 0->1 + 1->2
+                Packet pk0 = new Packet(0,1,distanceTable[2]);
+                NetworkSimulator.toLayer2(pk0);
+            }
+
         }
         if(p.getSource()==3){ //inkommande från entity 3
             distanceTable[2][3] = p.getMincost(0)+p.getMincost(2); //länkkostnad från 0->3 + 3->2
