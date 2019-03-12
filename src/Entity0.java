@@ -15,7 +15,7 @@ public class Entity0 extends Entity
         distanceTable[2][2] = 3;
         distanceTable[3][3] = 7;
         printDT();
-        //printDT();
+        //printDT();MM
 
         Packet pk1 = new Packet(0,1,distanceTable[1]);
         for (int i=0; i<4 ; i++){
