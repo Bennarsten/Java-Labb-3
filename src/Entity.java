@@ -16,4 +16,6 @@ public abstract class Entity
     // Print the distance table of the current entity.
     protected abstract void printDT();
 
+
+
 }
